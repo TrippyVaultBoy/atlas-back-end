@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify
 from db.pokemon_db import PokemonDB
 from models.pokemon import Pokemon
 
+"""python3 -m api.api"""
+
 app = Flask(__name__)
 
 db = PokemonDB()
