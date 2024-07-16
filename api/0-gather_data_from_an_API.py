@@ -28,7 +28,9 @@ def employee_todo_list(employee_id):
     done_tasks = [task for task in todo_data if task.get('completed')]
     finished_tasks = len(done_tasks)
 
-    print(f"Employee {employee_name} is done with tasks({finished_tasks}/{total_tasks}):")
+    print(f"Employee {} is done with tasks({}/{}):".format(employee_name,
+                                                           finished_tasks,
+                                                           total_tasks))
 
     for task in done_tasks:
         print(f"\t {task.get('title')}")
