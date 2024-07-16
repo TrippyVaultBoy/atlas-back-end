@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+"""Includes employee_todo_list"""
 import requests
 import argparse
 
 def employee_todo_list(employee_id):
+    """For a given employee ID, returns information
+    about his/her TODO list progress."""
     api_url = 'https://jsonplaceholder.typicode.com'
 
     response = requests.get(f'{api_url}/users/{employee_id}')
