@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Includes employee_todo_list"""
 import requests
+import sys
 
 
 def employee_todo_list(employee_id):
@@ -15,7 +16,7 @@ def employee_todo_list(employee_id):
         print(f"Error: Employee with ID {employee_id} not found.")
         return
 
-    employee_name = user_data.get('name')
+    employee_name = user_data['name']
 
     todos_response = requests.get(f'{api_url}/users/{employee_id}/todos')
     todo_data = todos_response.json()
@@ -37,4 +38,4 @@ def employee_todo_list(employee_id):
 
 
 if __name__ == "__main__":
-    employee_todo_list(1)
+    employee_todo_list(employee_id=sys.argv[1])
