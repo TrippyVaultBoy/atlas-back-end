@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Includes employee_todo_list"""
 import requests
-import argparse
+
 
 def employee_todo_list(employee_id):
     """For a given employee ID, returns information
@@ -14,7 +14,7 @@ def employee_todo_list(employee_id):
     if response.status_code != 200 or not user_data:
         print(f"Error: Employee with ID {employee_id} not found.")
         return
-    
+
     employee_name = user_data.get('name')
 
     todos_response = requests.get(f'{api_url}/users/{employee_id}/todos')
@@ -23,7 +23,7 @@ def employee_todo_list(employee_id):
     if response.status_code != 200 or not todo_data:
         print(f"Error: No tasks found for employee {employee_id}.")
         return
-    
+
     total_tasks = len(todo_data)
     done_tasks = [task for task in todo_data if task.get('completed')]
     finished_tasks = len(done_tasks)
@@ -32,6 +32,7 @@ def employee_todo_list(employee_id):
 
     for task in done_tasks:
         print(f"\t {task.get('title')}")
+
 
 if __name__ == "__main__":
     employee_todo_list(1)
