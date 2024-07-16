@@ -2,29 +2,33 @@
 import requests
 import argparse
 
-def main():
-    parser = argparse.ArgumentParser()
+def employee_todo_list(employee_id):
+    api_url = 'https://jsonplaceholder.typicode.com'
 
-    parser.add_argument("user", type=int, help="user id")
+    response = requests.get(f'{api_url}/users/{employee_id}')
+    user_data = response.json()
 
-    args = parser.parse_args()
-
-    user = requests.get("https://jsonplaceholder.typicode.com/users/" + f"{args.user}")
-    todos = requests.get("https://jsonplaceholder.typicode.com/todos/" + f"{args.user}")
+    if response.status_code != 200 or not user_data:
+        print(f"Error: Employee with ID {employee_id} not found.")
+        return
     
-    total_tasks = 0
-    completed_tasks = 0
+    employee_name = user_data.get('name')
 
-    name = user.json().get("name")
+    todos_response = requests.get(f'{api_url}/users/{employee_id}/todos')
+    todo_data = todos_response.json()
 
-    for task in todos.json():
-        if task.get("userId") == args.user:
-            total_tasks += 1
-            if task.get("completed") == True:
-                completed_tasks += 1
+    if response.status_code != 200 or not todo_data:
+        print(f"Error: No tasks found for employee {employee_id}.")
+        return
+    
+    total_tasks = len(todo_data)
+    done_tasks = [task for task in todo_data if task.get('completed')]
+    finished_tasks = len(done_tasks)
 
-    print(f"Employee {name} is done with tasks({completed_tasks}/{total_tasks}):")
+    print(f"Employee {employee_name} is done with tasks({finished_tasks}/{total_tasks}):")
 
+    for task in done_tasks:
+        print(f"\t {task.get('title')}")
 
 if __name__ == "__main__":
-    main()
+    employee_todo_list(1)
