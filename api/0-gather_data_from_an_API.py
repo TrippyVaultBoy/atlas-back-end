@@ -29,8 +29,8 @@ def employee_todo_list(employee_id):
     finished_tasks = len(done_tasks)
 
     print("Employee {} is done with tasks({}/{}):".format(employee_name,
-                                                           finished_tasks,
-                                                           total_tasks))
+                                                          finished_tasks,
+                                                          total_tasks))
 
     for task in done_tasks:
         print(f"\t {task.get('title')}")
