@@ -41,13 +41,12 @@ def employee_todo_list(employee_id):
     json_filename = f"{employee_id}.json"
     tasks = []
     for task in todo_data:
-        tasks.append({"userID": employee_id,
-                      "username": employee_name,
-                      "completed": task['completed'],
-                      "title": task['title']})
+        task = {"task": task["title"],
+                "completed": task["completed"],
+                "username": user_data["username"]} 
+        tasks.append(task)
     with open(json_filename, 'w') as file:
         json.dump({str(employee_id): tasks}, file, indent=4)
-
 
 if __name__ == "__main__":
     employee_todo_list(employee_id=sys.argv[1])
