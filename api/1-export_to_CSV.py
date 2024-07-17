@@ -37,6 +37,15 @@ def employee_todo_list(employee_id):
     for task in done_tasks:
         print(f"\t {task.get('title')}")
 
+    filename = f"{employee_id}.csv"
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
+        for task in todo_data:
+            writer.writerow([employee_id,
+                             user_data.get('username'),
+                             task.get('completed'),
+                             task.get('title')])
+
 
 if __name__ == "__main__":
     employee_todo_list(employee_id=sys.argv[1])
