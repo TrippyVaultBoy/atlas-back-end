@@ -54,7 +54,7 @@ def employee_todo_list(employee_id):
                       "username": employee_name,
                       "completed": task['completed'],
                       "title": task['title']})
-    with open(json_filename, mode='w') as file:
+    with open(json_filename, 'w') as file:
         json.dump(tasks, file, indent=4)
 
 
