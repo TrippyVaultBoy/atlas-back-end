@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Includes employee_todo_list"""
+import csv
+import json
 import requests
 import sys
 
@@ -35,6 +37,25 @@ def employee_todo_list(employee_id):
 
     for task in done_tasks:
         print(f"\t {task.get('title')}")
+
+    csv_filename = f"{employee_id}.csv"
+    with open(csv_filename, mode='w', newline='') as file:
+        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
+        for task in todo_data:
+            writer.writerow([employee_id,
+                             user_data.get('username'),
+                             task.get('completed'),
+                             task.get('title')])
+            
+    json_filename = f"{employee_id}.json"
+    tasks = []
+    for task in todo_data:
+        tasks.append({"userID": employee_id,
+                      "username": employee_name,
+                      "completed": task['completed'],
+                      "title": task['title']})
+    with open(json_filename, mode='w') as file:
+        json.dump(tasks, file, indent=4)
 
 
 if __name__ == "__main__":
