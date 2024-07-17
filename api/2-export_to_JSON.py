@@ -55,8 +55,9 @@ def employee_todo_list(employee_id):
                       "completed": task['completed'],
                       "title": task['title']})
     with open(json_filename, 'w') as file:
-        json.dump(tasks, file, indent=4)
+        json.dump({str(employee_id): tasks}, file, indent=4)
 
 
 if __name__ == "__main__":
     employee_todo_list(employee_id=sys.argv[1])
+
