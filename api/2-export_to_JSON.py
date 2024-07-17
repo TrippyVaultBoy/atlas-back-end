@@ -46,7 +46,7 @@ def employee_todo_list(employee_id):
                              user_data.get('username'),
                              task.get('completed'),
                              task.get('title')])
-            
+
     json_filename = f"{employee_id}.json"
     tasks = []
     for task in todo_data:
